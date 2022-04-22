@@ -30,3 +30,11 @@ game.add_turn([
 ## Evaluate Current Strategy
 
 `python evaluate_strategy.py`
+
+## Results on Wordle Official List
+
+| first | second | score |
+| ----- | ------ | ----- |
+| roate | linds  | 4.732 |
+| notes | acrid  | 4.749 |
+| resin | loath  | 4.773 |
