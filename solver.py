@@ -99,6 +99,6 @@ class Tester:
             self.game.add_turn(guess_results)
             if print_on:
                 print(f"{guess} {len(self.game.possible_words)} remaining")
-            self.play_game(print_on)
+            self.play_game(print_on, first_guess, second_guess)
 
         return self.number_of_guesses
