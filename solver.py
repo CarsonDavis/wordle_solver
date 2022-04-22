@@ -22,7 +22,7 @@ class Game:
 
     def load_word_list(self, source, word_length):
         if source == 'official':
-            with open('offical_word_list.txt', 'r') as f:
+            with open('official_word_list.txt', 'r') as f:
                 return [word.strip() for word in f.readlines()]
         else:
             return [word.lower() for word in words.words() if len(word) == word_length]
@@ -83,13 +83,13 @@ class Tester:
 
         return guess_results
 
-    def play_game(self, print_on=False):
+    def play_game(self, print_on=False, first_guess=None, second_guess=None):
         guess = self.make_guess()
         self.number_of_guesses += 1
-        if self.number_of_guesses == 1:
-            guess = 'tares'
-        elif self.number_of_guesses == 1:
-            guess = 'chino'
+        if first_guess and self.number_of_guesses == 1:
+            guess = first_guess
+        elif second_guess and self.number_of_guesses == 2:
+            guess = second_guess
 
         if guess == self.answer:
             if print_on:
