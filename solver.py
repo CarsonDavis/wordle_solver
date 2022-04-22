@@ -16,16 +16,26 @@ class Position:
 class Game:
     def __init__(self, word_length=5, word_list_source='official'):
         self.positions = [Position() for _ in range(0, word_length)]
-        self.possible_words = self.load_word_list(word_list_source, word_length)
+        self.possible_words = self.generate_initial_word_list(word_list_source, word_length)
         self.required_letters = set()
         self.game_state = []
 
-    def load_word_list(self, source, word_length):
+    def load_word_list_file(self, file_name):
+        with open(file_name, 'r') as f:
+            word_list = [word.strip() for word in f.readlines()]
+        return word_list
+
+    def generate_initial_word_list(self, source: str, word_length: int) -> list:
         if source == 'official':
-            with open('official_word_list.txt', 'r') as f:
-                return [word.strip() for word in f.readlines()]
+            word_list = self.load_word_list_file('official_word_list.txt')
+        elif source == 'knuth':
+            word_list = self.load_word_list_file('knuth_words.txt')
+        elif source == 'nltk':
+            word_list = [word.lower() for word in words.words() if len(word) == word_length]
         else:
-            return [word.lower() for word in words.words() if len(word) == word_length]
+            raise ValueError(f"Invalid word list source: {source}")
+
+        return word_list
 
     def add_turn(self, guess_results):
         for index, (guess_letter, guess_result) in enumerate(guess_results):
