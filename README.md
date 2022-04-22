@@ -33,8 +33,9 @@ game.add_turn([
 
 ## Results on Wordle Official List
 
-| first | second | score |
-| ----- | ------ | ----- |
-| roate | linds  | 4.732 |
-| notes | acrid  | 4.749 |
-| resin | loath  | 4.773 |
+| first  | second | score |
+| ------ | ------ | ----- |
+| roate  | linds  | 4.732 |
+| notes  | acrid  | 4.749 |
+| resin  | loath  | 4.773 |
+| random | random | 5.218 |
