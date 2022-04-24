@@ -39,7 +39,9 @@ class Game:
         elif source == 'nltk':
             word_list = [word.lower() for word in words.words() if len(word) == word_length]
         else:
-            raise ValueError(f"Invalid word list source: {source}")
+            raise ValueError(
+                f"Invalid word list source: {source}. Accepted choices are 'official', 'knuth', and 'nltk'."
+            )
 
         return word_list
 
