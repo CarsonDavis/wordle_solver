@@ -1,6 +1,11 @@
-from nltk.corpus import words
 import random
-from typing import List, Tuple
+from typing import List, Set, Tuple
+
+from nltk.corpus import words
+
+# define some custom types
+GuessResults = List[Tuple[str, str]]
+GameState = List[GuessResults]
 
 
 class Position:
@@ -15,18 +20,18 @@ class Position:
 
 
 class Game:
-    def __init__(self, word_length: int = 5, word_list_source: str = 'official'):
+    def __init__(self, word_length: int = 5, word_list_source: str = 'official') -> None:
         self.positions = [Position() for _ in range(0, word_length)]
         self.possible_words = self.generate_initial_word_list(word_list_source, word_length)
-        self.required_letters = set()
-        self.game_state = []
+        self.required_letters: Set[str] = set()
+        self.game_state: GameState = []
 
-    def load_word_list_file(self, file_name: str) -> List(str):
+    def load_word_list_file(self, file_name: str) -> List[str]:
         with open(file_name, 'r') as f:
-            word_list = [word.strip() for word in f.readlines()]
+            word_list = [word.strip().lower() for word in f.readlines()]
         return word_list
 
-    def generate_initial_word_list(self, source: str, word_length: int) -> List(str):
+    def generate_initial_word_list(self, source: str, word_length: int) -> List[str]:
         if source == 'official':
             word_list = self.load_word_list_file('official_word_list.txt')
         elif source == 'knuth':
@@ -38,7 +43,7 @@ class Game:
 
         return word_list
 
-    def add_turn(self, guess_results: List(Tuple(str))):
+    def add_turn(self, guess_results: GuessResults) -> None:
         for index, (guess_letter, guess_result) in enumerate(guess_results):
 
             if guess_result == "wrong":
@@ -54,7 +59,7 @@ class Game:
         self.reduce_possible_words()
         self.game_state.append(guess_results)
 
-    def reduce_possible_words(self):
+    def reduce_possible_words(self) -> None:
         self.possible_words = [
             word for word in self.possible_words if self.word_has_required_letters(word)
         ]
@@ -69,12 +74,12 @@ class Game:
                 return False
         return True
 
-    def __repr__(self):
-        return self.positions
+    def __repr__(self) -> str:
+        return '\n'.join([position.__str__() for position in self.positions])
 
 
 class Tester:
-    def __init__(self, answer: str):
+    def __init__(self, answer: str) -> None:
         self.answer = answer
         self.game = Game()
         self.number_of_guesses = 0
@@ -82,7 +87,7 @@ class Tester:
     def make_guess(self) -> str:
         return random.choice(tuple(self.game.possible_words))
 
-    def evaluate_guess(self, guess: str) -> List(Tuple(str)):
+    def evaluate_guess(self, guess: str) -> GuessResults:
         guess_results = []
         for index, guess_letter in enumerate(guess):
             if guess_letter == self.answer[index]:
