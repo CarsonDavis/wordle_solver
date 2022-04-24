@@ -1,8 +1,6 @@
 from statistics import mean
 from typing import List, Tuple
 
-from nltk.corpus import words
-
 from solver import Game, Tester
 
 word_list = Game().possible_words
