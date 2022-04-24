@@ -33,9 +33,9 @@ class Game:
 
     def generate_initial_word_list(self, source: str, word_length: int) -> List[str]:
         if source == 'official':
-            word_list = self.load_word_list_file('official_word_list.txt')
+            word_list = self.load_word_list_file('word_lists/official_word_list.txt')
         elif source == 'knuth':
-            word_list = self.load_word_list_file('knuth_words.txt')
+            word_list = self.load_word_list_file('word_lists/knuth_words.txt')
         elif source == 'nltk':
             word_list = [word.lower() for word in words.words() if len(word) == word_length]
         else:
