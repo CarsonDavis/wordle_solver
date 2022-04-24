@@ -1,7 +1,7 @@
 from statistics import mean
 from typing import List, Tuple
 
-from solver import Game, Tester
+from game_mechanics import Game, Tester
 
 word_list = Game().possible_words
 
