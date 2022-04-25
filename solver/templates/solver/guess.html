@@ -1,0 +1,12 @@
+<form name="form" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+
+<ul>
+    {% for possibility in possible_words %}
+        <li>{{ possibility }}</li>
+    {% endfor %}
+</ul>
