@@ -41,9 +41,9 @@ class Game:
         length, and returns the list of strings"""
 
         if source == 'official':
-            word_list = self.load_word_list_file('word_lists/official_word_list.txt')
+            word_list = self.load_word_list_file('solver/utils/word_lists/official_word_list.txt')
         elif source == 'knuth':
-            word_list = self.load_word_list_file('word_lists/knuth_words.txt')
+            word_list = self.load_word_list_file('solver/utils/word_lists/knuth_words.txt')
         elif source == 'nltk':
             word_list = words.words()
         else:
