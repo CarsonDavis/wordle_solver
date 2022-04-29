@@ -1,10 +1,12 @@
 import random
-from typing import List, Set, Tuple
+from typing import List, Literal, Set, Tuple
 
 from nltk.corpus import words
 
+
 # define some custom types
-GuessResults = List[Tuple[str, str]]
+ResultChoices = Literal['position', 'correct', 'wrong']
+GuessResults = List[Tuple[str, ResultChoices]]
 GameState = List[GuessResults]
 
 
@@ -77,6 +79,9 @@ class Game:
             elif guess_result == "position":
                 self.positions[index].remove_letter(guess_letter)
                 self.required_letters.add(guess_letter)
+
+            else:
+                raise ValueError(f"guess result must be one of {GuessResults}")
 
         self.game_state.append(guess_results)
 
