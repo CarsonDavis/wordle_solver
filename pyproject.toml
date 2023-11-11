@@ -1,3 +1,6 @@
 [tool.black]
 line-length = 100
 skip-string-normalization = true
+
+[mypy]
+ignore_missing_imports = true
